@@ -12,10 +12,10 @@ export function DifficultyPicker({ difficulties, current, onSelect }: Difficulty
       {Object.entries(difficulties).map(([key, val]) => (
         <button
           key={key}
-          className={`diff-btn ${current === key ? 'active' : ''}`}
+          className={`btn btn--pill ${current === key ? 'btn--filled' : ''}`}
           onClick={() => onSelect(key)}
         >
-          {val.label} <span style={{ opacity: 0.6, marginLeft: 4 }}>{val.rows}&times;{val.cols}</span>
+          {val.label} <span style={{ opacity: 0.7 }}>{val.rows}&times;{val.cols}</span>
         </button>
       ))}
     </div>

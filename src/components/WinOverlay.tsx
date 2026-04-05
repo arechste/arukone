@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { PATH_COLORS } from '../lib/constants';
-import type { DifficultyConfig, GameStats } from '../lib/types';
+import type { DifficultyConfig } from '../lib/types';
 
 interface WinOverlayProps {
   difficulty: DifficultyConfig;
@@ -62,7 +62,7 @@ export function WinOverlay({ difficulty, rows, cols, timer, moves, bestTime, tot
         <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 20 }}>
           {totalSolved} puzzle{totalSolved !== 1 ? 's' : ''} solved
         </p>
-        <button className="next-btn" onClick={onNextPuzzle}>
+        <button className="btn btn--filled" style={{ padding: '12px 32px', fontSize: 15 }} onClick={onNextPuzzle}>
           Next Puzzle &rarr;
         </button>
       </div>

@@ -60,17 +60,16 @@ export default function App() {
         onHint={handleHint}
       />
 
-      <div style={{ marginTop: 4 }}>
-        <button
-          onClick={handleRevealSolution}
-          style={{
-            background: 'none', border: 'none', color: 'var(--text-muted)',
-            fontSize: 10, opacity: 0.3, cursor: 'pointer', fontFamily: 'inherit',
-          }}
-        >
-          {showSolution ? '\u2298 hide solution' : '\u2299 debug'}
-        </button>
-      </div>
+      <button
+        onClick={handleRevealSolution}
+        style={{
+          background: 'none', border: 'none', color: 'var(--text-muted)',
+          fontSize: 10, opacity: 0.3, cursor: 'pointer', fontFamily: 'inherit',
+          marginTop: 4,
+        }}
+      >
+        {showSolution ? '\u2298 hide solution' : '\u2299 debug'}
+      </button>
 
       <PairStatus endpoints={puzzle.endpoints} statuses={pairStatuses} />
 

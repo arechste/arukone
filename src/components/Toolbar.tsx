@@ -10,18 +10,18 @@ interface ToolbarProps {
 
 export function Toolbar({ canUndo, canHint, hintActive, onUndo, onReset, onNewPuzzle, onHint }: ToolbarProps) {
   return (
-    <div className="actions" style={{ marginTop: 12 }}>
-      <button className="action-btn" onClick={onUndo} disabled={!canUndo}>
+    <div className="actions">
+      <button className="btn" onClick={onUndo} disabled={!canUndo}>
         ↶ Undo
       </button>
-      <button className="action-btn" onClick={onReset}>
+      <button className="btn" onClick={onReset}>
         ⟳ Reset
       </button>
-      <button className="action-btn" onClick={onNewPuzzle}>
-        ✦ New Puzzle
+      <button className="btn" onClick={onNewPuzzle}>
+        ✦ New
       </button>
       <button
-        className={`action-btn hint-btn ${hintActive ? 'hint-active' : ''}`}
+        className={`btn ${hintActive ? 'btn--accent-filled' : 'btn--accent'}`}
         onClick={onHint}
         disabled={!canHint}
       >

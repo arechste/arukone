@@ -5,16 +5,19 @@
 
 body, #root {
   font-family: 'DM Sans', sans-serif;
-  min-height: 100vh;
+  min-height: 100dvh;
   -webkit-user-select: none; user-select: none;
   -webkit-touch-callout: none;
   overflow-y: auto;
   margin: 0;
+  background: var(--bg, #0c0c14);
 }
 
+/* ── LAYOUT ── */
 .app {
   display: flex; flex-direction: column; align-items: center;
-  min-height: 100vh; padding: 12px 12px 20px;
+  min-height: 100dvh;
+  padding: 12px 16px calc(env(safe-area-inset-bottom, 0px) + 20px);
   max-width: 520px; margin: 0 auto;
   background: var(--bg); color: var(--text);
 }
@@ -22,71 +25,112 @@ body, #root {
 /* ── HEADER ── */
 .header {
   width: 100%; display: flex; justify-content: space-between; align-items: center;
-  padding: 8px 4px; margin-bottom: 8px;
+  padding: 4px 0; margin-bottom: 10px;
 }
 .logo {
-  font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
+  font-size: 22px; font-weight: 700; letter-spacing: -0.5px;
   color: var(--accent);
 }
-.theme-btn {
-  background: var(--surface); border: 1px solid var(--grid-line);
-  color: var(--text-muted); border-radius: 8px; padding: 6px 10px;
-  font-size: 16px; cursor: pointer; transition: all 0.2s;
-}
-.theme-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-/* ── CONTROLS BAR ── */
+/* ── BUTTONS (shared) ── */
+.btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1.5px solid var(--grid-line);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn:active {
+  transform: scale(0.96);
+}
+.btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* filled variant */
+.btn--filled {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+}
+.btn--filled:hover {
+  filter: brightness(1.1);
+  color: var(--accent-text);
+}
+
+/* icon-only variant (theme toggle) */
+.btn--icon {
+  padding: 7px 10px;
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* accent-outline variant (hint active) */
+.btn--accent {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.btn--accent-filled {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+}
+
+/* ── CONTROLS BAR (difficulty) ── */
 .controls {
   width: 100%; display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap;
   justify-content: center;
 }
-.diff-btn {
-  padding: 7px 16px; border-radius: 20px; border: 1.5px solid var(--grid-line);
-  background: transparent; color: var(--text-muted); font-family: inherit;
-  font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
-}
-.diff-btn.active {
-  background: var(--accent); color: #0b0b12; border-color: var(--accent);
-}
-.diff-btn:not(.active):hover { border-color: var(--accent); color: var(--accent); }
 
 /* ── STATS BAR ── */
 .stats {
   width: 100%; display: flex; justify-content: space-between; align-items: center;
-  padding: 8px 4px; margin-bottom: 10px;
+  padding: 6px 2px; margin-bottom: 10px;
 }
 .stat {
-  display: flex; align-items: center; gap: 6px;
+  display: flex; align-items: center; gap: 5px;
   font-size: 13px; color: var(--text-muted); font-variant-numeric: tabular-nums;
 }
 .stat strong { color: var(--text); font-weight: 600; }
 
 /* ── ACTION BUTTONS ── */
 .actions {
-  display: flex; gap: 8px; margin-bottom: 12px;
+  display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+  justify-content: center;
 }
-.action-btn {
-  padding: 7px 14px; border-radius: 8px; border: 1px solid var(--grid-line);
-  background: var(--surface); color: var(--text-muted); font-family: inherit;
-  font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s;
-  display: flex; align-items: center; gap: 5px;
-}
-.action-btn:hover { border-color: var(--accent); color: var(--accent); }
-.action-btn:active { transform: scale(0.96); }
 
 /* ── GRID ── */
 .grid-wrapper {
   position: relative; width: 100%;
   max-width: 480px;
-  background: var(--surface); border-radius: 12px;
-  box-shadow: var(--shadow); overflow: hidden;
-  border: 3px solid var(--grid-line);
+  background: var(--grid-line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
   touch-action: none;
+  padding: 2px;
 }
 .grid {
   display: grid; width: 100%;
-  gap: 0; padding: 0;
-  background: var(--surface);
+  gap: 1.5px; padding: 0;
+  background: var(--grid-line);
+  border-radius: 12px;
+  overflow: hidden;
 }
 .cell {
   position: relative; background: var(--cell);
@@ -95,9 +139,8 @@ body, #root {
   cursor: pointer; transition: background 0.1s;
   overflow: visible;
   min-width: 0;
-  border: 1px solid var(--grid-line);
 }
-.cell:active { background: var(--grid); }
+.cell:active { background: var(--cell-hover); }
 
 /* ── PATH SEGMENT ── */
 .path-segment {
@@ -127,12 +170,14 @@ body, #root {
 /* ── ENDPOINT ── */
 .endpoint {
   position: relative; z-index: 5;
-  width: 54%; height: 54%; border-radius: 50%;
+  width: 56%; height: 56%; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-family: 'JetBrains Mono', monospace; font-weight: 600;
   font-size: clamp(10px, 2.4vw, 16px);
-  color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  box-shadow:
+    0 2px 6px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.15);
 }
 
 /* ── WIN OVERLAY ── */
@@ -145,7 +190,7 @@ body, #root {
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes popIn {
   0% { transform: scale(0.5); opacity: 0; }
-  60% { transform: scale(1.08); }
+  60% { transform: scale(1.05); }
   100% { transform: scale(1); opacity: 1; }
 }
 @keyframes confettiDrift {
@@ -156,7 +201,7 @@ body, #root {
   background: var(--surface); border-radius: 20px; padding: 32px 40px;
   text-align: center; animation: popIn 0.5s ease forwards;
   border: 2px solid var(--accent); box-shadow: 0 0 60px var(--accent-dim);
-  max-width: 320px;
+  max-width: 320px; margin: 0 16px;
 }
 .win-card h2 {
   font-size: 28px; font-weight: 700; margin-bottom: 6px; color: var(--accent);
@@ -168,13 +213,6 @@ body, #root {
 .win-stat-item { text-align: center; }
 .win-stat-item .val { font-size: 24px; font-weight: 700; color: var(--text); }
 .win-stat-item .lbl { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-.next-btn {
-  padding: 12px 32px; border-radius: 12px; border: none;
-  background: var(--accent); color: #0b0b12; font-family: inherit;
-  font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s;
-}
-.next-btn:hover { transform: scale(1.04); }
-.next-btn:active { transform: scale(0.97); }
 
 /* ── CONFETTI ── */
 .confetti-piece {
@@ -189,13 +227,14 @@ body, #root {
   justify-content: center; margin-top: 12px; padding: 0 4px;
 }
 .pair-dot {
-  width: 24px; height: 24px; border-radius: 50%;
+  width: 26px; height: 26px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 10px; font-weight: 700; color: #fff;
-  opacity: 0.3; transition: all 0.3s;
+  font-size: 10px; font-weight: 700;
+  opacity: 0.25; transition: all 0.3s;
   font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
 }
-.pair-dot.partial { opacity: 0.6; }
+.pair-dot.partial { opacity: 0.55; }
 
 /* ── HINT OVERLAYS ── */
 .hint-overlay {
@@ -216,6 +255,44 @@ body, #root {
   50% { opacity: 1; transform: scale(1.05); }
   100% { opacity: 1; transform: scale(1); }
 }
-.hint-btn { border-color: var(--accent) !important; color: var(--accent) !important; }
-.hint-btn.hint-active { background: var(--accent) !important; color: #0b0b12 !important; }
-.hint-btn:disabled { border-color: var(--grid-line) !important; color: var(--text-muted) !important; opacity: 0.5; }
+
+/* ── RESPONSIVE ── */
+
+/* iPhone SE / small phones (< 380px) */
+@media (max-width: 380px) {
+  .app { padding: 8px 10px 16px; }
+  .logo { font-size: 18px; }
+  .btn { padding: 7px 12px; font-size: 12px; }
+  .stat { font-size: 12px; }
+  .actions { gap: 6px; }
+  .endpoint { font-size: clamp(9px, 2.2vw, 14px); }
+  .win-card { padding: 24px 28px; }
+  .win-card h2 { font-size: 24px; }
+}
+
+/* Tablet / iPad (768px+) */
+@media (min-width: 768px) {
+  .app { max-width: 600px; padding: 20px 24px 32px; }
+  .grid-wrapper { max-width: 540px; }
+  .logo { font-size: 26px; }
+  .btn { padding: 10px 20px; font-size: 14px; }
+  .stat { font-size: 14px; }
+  .pair-dot { width: 30px; height: 30px; font-size: 11px; }
+  .endpoint { font-size: clamp(12px, 2vw, 18px); }
+}
+
+/* Large iPad / desktop (1024px+) */
+@media (min-width: 1024px) {
+  .app { max-width: 640px; }
+  .grid-wrapper { max-width: 580px; }
+}
+
+/* Landscape phones — constrain height */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app { padding: 6px 12px 10px; }
+  .header { margin-bottom: 4px; }
+  .controls { margin-bottom: 6px; }
+  .stats { margin-bottom: 6px; padding: 4px 2px; }
+  .actions { margin-top: 6px; }
+  .pair-status { margin-top: 6px; }
+}

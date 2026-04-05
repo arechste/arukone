@@ -1,4 +1,4 @@
-import { pairLabel } from '../lib/constants';
+import { pairLabel, getContrastText } from '../lib/constants';
 
 interface EndpointProps {
   pairId: number;
@@ -7,7 +7,10 @@ interface EndpointProps {
 
 export function Endpoint({ pairId, color }: EndpointProps) {
   return (
-    <div className="endpoint" style={{ background: color, zIndex: 5 }}>
+    <div
+      className="endpoint"
+      style={{ background: color, color: getContrastText(color) }}
+    >
       {pairLabel(pairId)}
     </div>
   );

@@ -1,0 +1,12 @@
+[tasks.dev]
+description = "Start Vite dev server on port 5173"
+run = "npx vite --host --port 5173"
+
+[tasks."dev:stop"]
+description = "Stop Vite dev server on port 5173"
+run = "lsof -i :5173 -t | xargs kill 2>/dev/null; echo 'stopped'"
+
+[tasks."dev:restart"]
+description = "Restart Vite dev server"
+depends = ["dev:stop"]
+run = "npx vite --host --port 5173"
