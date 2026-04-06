@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useRef } from 'react';
-import type { Cell, Puzzle, GameStats, PairStatus } from '../lib/types';
+import type { GameStats, PairStatus } from '../lib/types';
 import { cellKey, getDailySeed } from '../lib/gameLogic';
 import { loadPuzzle, getDifficulties } from '../lib/puzzles';
 import { useDrawing } from './useDrawing';
