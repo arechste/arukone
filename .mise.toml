@@ -1,0 +1,28 @@
+[tasks.dev]
+description = "Start dev server"
+run = "bun run dev --host"
+
+[tasks."dev:stop"]
+description = "Stop dev server"
+run = "lsof -ti:5173 | xargs kill -9 2>/dev/null || true"
+
+[tasks."dev:restart"]
+description = "Restart dev server"
+depends = ["dev:stop"]
+run = "mise run dev"
+
+[tasks.test]
+description = "Run tests"
+run = "bunx vitest run"
+
+[tasks.lint]
+description = "Run ESLint"
+run = "bun run lint"
+
+[tasks.check]
+description = "Lint + typecheck"
+run = ["bun run lint", "tsc -b --noEmit"]
+
+[tasks.build]
+description = "Type-check + build"
+run = "bun run build"
