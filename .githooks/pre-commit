@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "pre-commit: running lint + typecheck..."
+
+bun run lint
+bun run --bun tsc -b --noEmit
+
+echo "pre-commit: passed"

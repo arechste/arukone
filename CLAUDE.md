@@ -32,9 +32,20 @@ Key patterns:
 ```bash
 mise run dev          # Start dev server on :5173
 mise run dev:stop     # Stop dev server
-bun run build         # Type-check + build
-bun run lint          # ESLint
+mise run dev:restart  # Restart dev server
+mise run lint         # ESLint only
+mise run check        # Lint + typecheck
+mise run test         # Vitest test suite
+mise run build        # Type-check + production build
 ```
+
+## CI
+
+- **Pre-commit hook** (`.githooks/pre-commit`): runs lint + typecheck locally on every commit
+  - Setup: `git config core.hooksPath .githooks` (once per clone)
+- **GitHub Actions** (`.github/workflows/ci.yml`): lint, typecheck, test, build
+  - Triggers on push/PR to main, path-filtered to skip docs/generator changes
+  - Free-tier friendly: local hook catches most issues before pushing
 
 ## Puzzle parameters
 

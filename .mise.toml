@@ -1,3 +1,7 @@
+[tools]
+bun = "latest"
+node = "22"
+
 [tasks.dev]
 description = "Start dev server"
 run = "bun run dev --host"
@@ -21,7 +25,7 @@ run = "bun run lint"
 
 [tasks.check]
 description = "Lint + typecheck"
-run = ["bun run lint", "tsc -b --noEmit"]
+run = ["bun run lint", "bun run --bun tsc -b --noEmit"]
 
 [tasks.build]
 description = "Type-check + build"

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState } from 'react';
 import { PATH_COLORS } from '../lib/constants';
 import type { DifficultyConfig } from '../lib/types';
 
@@ -13,18 +13,20 @@ interface WinOverlayProps {
   onNextPuzzle: () => void;
 }
 
+function generateConfetti() {
+  return Array.from({ length: 40 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    color: PATH_COLORS[i % PATH_COLORS.length],
+    delay: Math.random() * 2,
+    duration: 2 + Math.random() * 3,
+    size: 6 + Math.random() * 8,
+    shape: Math.random() > 0.5 ? '50%' : '2px',
+  }));
+}
+
 function Confetti() {
-  const pieces = useMemo(() =>
-    Array.from({ length: 40 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      color: PATH_COLORS[i % PATH_COLORS.length],
-      delay: Math.random() * 2,
-      duration: 2 + Math.random() * 3,
-      size: 6 + Math.random() * 8,
-      shape: Math.random() > 0.5 ? '50%' : '2px',
-    })), []
-  );
+  const [pieces] = useState(generateConfetti);
   return (
     <>
       {pieces.map(p => (
