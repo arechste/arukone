@@ -27,6 +27,10 @@ run = "bun run lint"
 description = "Lint + typecheck"
 run = ["bun run lint", "bun run --bun tsc -b --noEmit"]
 
+[tasks.audit]
+description = "Audit dependencies for vulnerabilities"
+run = "bun audit --audit-level=high"
+
 [tasks.build]
 description = "Type-check + build"
 run = "bun run build"

@@ -36,6 +36,7 @@ mise run dev:restart  # Restart dev server
 mise run lint         # ESLint only
 mise run check        # Lint + typecheck
 mise run test         # Vitest test suite
+mise run audit        # Dependency vulnerability check
 mise run build        # Type-check + production build
 ```
 
