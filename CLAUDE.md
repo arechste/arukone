@@ -59,6 +59,7 @@ mise run build        # Type-check + production build
 
 ## Decisions
 
+- Fonts: system font stacks (no external fonts) — `system-ui` for UI, `ui-monospace` for grid letters. Custom branded fonts deferred to future phase if needed.
 - `checkWin()` validates structurally (all filled, paths connect) — does NOT compare to stored solution
 - Hint system compares against stored solution — uniqueness verification deferred
 - Generator uses thomasahle/numberlink (MITM algorithm) — quality filtered by interleaving score
