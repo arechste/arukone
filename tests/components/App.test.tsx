@@ -5,12 +5,14 @@ import App from '../../src/App';
 describe('App', () => {
   beforeEach(() => {
     localStorage.clear();
+    // suppress first-visit help overlay so it doesn't shadow text queries
+    localStorage.setItem('arukone:help-dismissed-v1', '1');
   });
 
   it('renders the game', () => {
     render(<App />);
-    expect(screen.getByText(/Easy/)).toBeInTheDocument();
-    expect(screen.getByText(/Medium/)).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Easy/ })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Medium/ })).toBeInTheDocument();
     expect(screen.getByText(/moves/)).toBeInTheDocument();
   });
 
