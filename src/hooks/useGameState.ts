@@ -231,7 +231,7 @@ export function useGameState() {
   }, [drawing, playerPaths, puzzle]);
 
   return {
-    theme, difficulty, puzzle, timer, moves, solved, started,
+    theme, difficulty, puzzleIndex, puzzle, timer, moves, solved, started,
     hintMap, showSolution, stats, difficulties, pairStatuses,
     playerPaths, drawing, history, gridRef,
     handlePointerDown, handlePointerMove, handlePointerUp,

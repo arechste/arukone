@@ -259,6 +259,76 @@ html, body, #root {
 }
 .footer__version:hover { opacity: 0.9; }
 
+/* ── MODAL (help overlay) ── */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--overlay); z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+.modal-card {
+  background: var(--surface); color: var(--text);
+  border-radius: 16px; padding: 28px 28px 24px;
+  max-width: 380px; width: 100%;
+  position: relative;
+  border: 1px solid var(--grid-line);
+  box-shadow: var(--shadow);
+  animation: popIn 0.25s ease;
+}
+.modal-card h2 {
+  font-size: 20px; font-weight: 700; margin-bottom: 4px;
+  color: var(--accent);
+}
+.modal-context {
+  font-size: 12px; color: var(--text-muted);
+  margin-bottom: 16px; font-variant-numeric: tabular-nums;
+}
+.modal-close {
+  position: absolute; top: 8px; right: 12px;
+  background: none; border: none; color: var(--text-muted);
+  font-size: 22px; line-height: 1; cursor: pointer;
+  padding: 4px 8px;
+}
+.modal-close:hover { color: var(--text); }
+.modal-fineprint {
+  font-size: 11px; color: var(--text-muted);
+  line-height: 1.5; margin: 16px 0 4px;
+}
+.help-steps {
+  list-style: decimal inside;
+  font-size: 14px; line-height: 1.6;
+  margin-bottom: 8px;
+  padding-left: 4px;
+}
+.help-steps li { margin-bottom: 6px; }
+
+/* ── FEEDBACK WIDGET ── */
+.feedback {
+  border-top: 1px solid var(--grid-line);
+  padding-top: 14px; margin-top: 4px;
+}
+.feedback-prompt {
+  font-size: 12px; color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.feedback-buttons {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  justify-content: center;
+}
+.feedback-thanks {
+  font-size: 12px; color: var(--text-muted);
+  margin: 14px 0 4px; font-style: italic;
+}
+.btn--small {
+  padding: 6px 12px; font-size: 12px;
+}
+.btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-muted);
+}
+
 /* ── HINT OVERLAYS ── */
 .hint-overlay {
   position: absolute; inset: 8%; z-index: 8;

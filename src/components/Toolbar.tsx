@@ -6,9 +6,10 @@ interface ToolbarProps {
   onReset: () => void;
   onNewPuzzle: () => void;
   onHint: () => void;
+  onShowHelp: () => void;
 }
 
-export function Toolbar({ canUndo, canHint, hintActive, onUndo, onReset, onNewPuzzle, onHint }: ToolbarProps) {
+export function Toolbar({ canUndo, canHint, hintActive, onUndo, onReset, onNewPuzzle, onHint, onShowHelp }: ToolbarProps) {
   return (
     <div className="actions">
       <button className="btn" onClick={onUndo} disabled={!canUndo}>
@@ -27,6 +28,7 @@ export function Toolbar({ canUndo, canHint, hintActive, onUndo, onReset, onNewPu
       >
         {hintActive ? '✓ Hide' : '✓ Hint'}
       </button>
+      <button className="btn btn--icon" onClick={onShowHelp} aria-label="How to play">?</button>
     </div>
   );
 }
