@@ -42,8 +42,8 @@ mise run build        # Type-check + production build
 
 ## CI
 
-- **Pre-commit hook** (`.githooks/pre-commit`): runs lint + typecheck locally on every commit
-  - Setup: `git config core.hooksPath .githooks` (once per clone)
+- **Pre-commit hooks**: pinned via `.pre-commit-config.yaml` (framework, deterministic). Runs whitespace cleanup, gitleaks secret scan, lint, typecheck.
+  - Setup: hooks run automatically if `pre-commit` is installed and `.pre-commit-config.yaml` is present (the global git pre-commit hook auto-dispatches). Standalone repos: `pre-commit install`.
 - **GitHub Actions** (`.github/workflows/ci.yml`): lint, typecheck, test, build
   - Triggers on push/PR to main, path-filtered to skip docs/generator changes
   - Free-tier friendly: local hook catches most issues before pushing

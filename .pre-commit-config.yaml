@@ -1,0 +1,47 @@
+# Pre-commit hooks — pinned by SHA for supply-chain integrity.
+#
+# Installation:  brew install pre-commit && pre-commit install
+# Or:            mise run hooks:install
+#
+# To bump:       pre-commit autoupdate (review the SHA changes before committing)
+#
+# Each `rev:` is a Git commit SHA, not a tag, so a maintainer cannot
+# silently retag and inject different code. SHAs come from official
+# upstream repositories (gitleaks, pre-commit) reviewed for trust.
+
+repos:
+  # Basic hygiene — official pre-commit org maintains these
+  # https://github.com/pre-commit/pre-commit-hooks v6.0.0
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+
+  # Secret scan — official gitleaks repo
+  # https://github.com/gitleaks/gitleaks v8.30.1
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e
+    hooks:
+      - id: gitleaks
+
+  # Project-local checks — run inside the project's bun toolchain
+  - repo: local
+    hooks:
+      - id: lint
+        name: ESLint (bun run lint)
+        entry: bun run lint
+        language: system
+        types_or: [ts, tsx, javascript]
+        pass_filenames: false
+      - id: typecheck
+        name: tsc --noEmit
+        entry: bun run --bun tsc -b --noEmit
+        language: system
+        types_or: [ts, tsx]
+        pass_filenames: false

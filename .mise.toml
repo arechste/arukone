@@ -31,6 +31,18 @@ run = ["bun run lint", "bun run --bun tsc -b --noEmit"]
 description = "Audit dependencies for vulnerabilities"
 run = "bun audit --audit-level=high"
 
+[tasks."hooks:install"]
+description = "Install pre-commit framework hooks (one-time per clone)"
+run = "pre-commit install"
+
+[tasks."hooks:run"]
+description = "Run all pre-commit hooks against all files"
+run = "pre-commit run --all-files"
+
+[tasks."hooks:update"]
+description = "Bump pinned hook revisions (review SHA changes before committing)"
+run = "pre-commit autoupdate"
+
 [tasks.build]
 description = "Type-check + build"
 run = "bun run build"

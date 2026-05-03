@@ -18,8 +18,8 @@ who are persistently abusive.
 git clone https://github.com/<you>/arukone.git
 cd arukone
 bun install
-git config core.hooksPath .githooks    # one-time, enables pre-commit checks
-mise run dev                           # http://localhost:5173
+brew install pre-commit && pre-commit install   # one-time, enables pinned pre-commit hooks
+mise run dev                                    # http://localhost:5173
 ```
 
 Requirements:

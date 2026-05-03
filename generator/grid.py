@@ -130,5 +130,3 @@ class Grid:
         for key, val in path_grid.make_tubes()[0]:
             if val == '|':
                 self.grid.pop(key, None)
-
-
