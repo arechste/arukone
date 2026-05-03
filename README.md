@@ -19,9 +19,15 @@ No SSR, no shadcn, no Next.js — a single static bundle deployed to a CDN.
 
 ## Play
 
-A live demo is hosted on Cloudflare Workers. The exact URL is intentionally
-not committed to this public repository; see your own deployment after
-following [`docs/DEPLOY.md`](./docs/DEPLOY.md).
+Live at **[arukone.play.8-p.ch](https://arukone.play.8-p.ch)**.
+
+<a href="https://arukone.play.8-p.ch">
+  <img src="public/play-qr.svg" alt="Scan to play arukone.play.8-p.ch" width="180" />
+</a>
+
+Scan to open on your phone or tablet — the game runs entirely in the
+browser, no install required. To deploy your own copy on a different
+domain, see [`docs/DEPLOY.md`](./docs/DEPLOY.md).
 
 ## Development
 
