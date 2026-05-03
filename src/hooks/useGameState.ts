@@ -1,4 +1,5 @@
-import { useState, useMemo, useCallback, useRef } from 'react';
+import { useState, useMemo, useCallback, useRef, useEffect } from 'react';
+import { getThemeVars } from '../lib/theme';
 import type { GameStats, PairStatus } from '../lib/types';
 import { cellKey, getDailySeed } from '../lib/gameLogic';
 import { loadPuzzle, getDifficulties } from '../lib/puzzles';
@@ -86,6 +87,13 @@ export function useGameState() {
   const handleToggleTheme = useCallback(() => {
     setTheme(t => t === 'dark' ? 'light' : 'dark');
   }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const vars = getThemeVars(theme);
+    for (const [k, v] of Object.entries(vars)) root.style.setProperty(k, v);
+    root.dataset.theme = theme;
+  }, [theme]);
 
   const handleHint = useCallback(() => {
     if (hintMap) {

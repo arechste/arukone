@@ -1,5 +1,4 @@
 import { useGameState } from './hooks/useGameState';
-import { getThemeVars } from './lib/theme';
 import { Header } from './components/Header';
 import { DifficultyPicker } from './components/DifficultyPicker';
 import { Grid } from './components/Grid';
@@ -19,11 +18,10 @@ export default function App() {
     getCellContent, formatTime,
   } = useGameState();
 
-  const themeVars = getThemeVars(theme);
   const connectedCount = pairStatuses.filter(s => s === 'connected').length;
 
   return (
-    <div className="app" style={themeVars as React.CSSProperties}>
+    <div className="app">
       <Header theme={theme} onToggleTheme={handleToggleTheme} />
 
       <DifficultyPicker
