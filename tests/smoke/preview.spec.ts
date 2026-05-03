@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+// `?nohelp` suppresses the first-visit help modal so it doesn't intercept clicks.
+const APP_PATH = '/?nohelp';
+
 test.describe('preview smoke', () => {
   test('loads with no console errors', async ({ page }, testInfo) => {
     const errors: string[] = [];
@@ -8,7 +11,7 @@ test.describe('preview smoke', () => {
     });
     page.on('pageerror', (err) => errors.push(err.message));
 
-    await page.goto('/');
+    await page.goto(APP_PATH);
     await expect(page.locator('.app')).toBeVisible();
     await expect(page.locator('.logo')).toHaveText(/arukone/i);
 
@@ -33,7 +36,7 @@ test.describe('preview smoke', () => {
   });
 
   test('difficulty picker switches puzzle', async ({ page }) => {
-    await page.goto('/');
+    await page.goto(APP_PATH);
     for (const label of ['Easy', 'Medium', 'Hard', 'Extreme']) {
       const btn = page.getByRole('button', { name: new RegExp(`^${label}`, 'i') });
       await btn.click();
@@ -42,7 +45,7 @@ test.describe('preview smoke', () => {
   });
 
   test('version footer links to release', async ({ page }) => {
-    await page.goto('/');
+    await page.goto(APP_PATH);
     const versionLink = page.locator('.footer__version');
     await expect(versionLink).toBeVisible();
     const href = await versionLink.getAttribute('href');
