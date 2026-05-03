@@ -8,6 +8,11 @@ dist
 *.swp
 .idea/
 
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
 # Secrets — never commit
 .env
 .env.local
