@@ -1,3 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Adapted from https://github.com/thomasahle/numberlink (AGPL-3.0)
+# Copyright (c) Thomas Ahle and contributors
+# Modifications copyright (c) 2026 Alex Rechsteiner
+# See ./LICENSE and ./README.md.
+
 import sys
 import random
 import collections

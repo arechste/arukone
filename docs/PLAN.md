@@ -4,7 +4,7 @@
 
 Arukone is a working Vite + React + TypeScript puzzle game. The code is migrated and polished (Phases 1-5), but the project lacks production infrastructure: no tests, no CI, no releases, no deployment config, and the repo has leftover files from the original prototype. This plan takes it from "works on my machine" to "deployed, tested, versioned, and maintainable."
 
-Domain: `play.8-p.ch` (Cloudflare, existing tenant)
+Domain: `arukone.play.example.com` (placeholder; real domain in private project memory)
 
 ---
 
@@ -208,7 +208,7 @@ For Arukone this is ideal: the game is self-contained (no API calls), all 800 pu
 
 ### Phase 3: Deployment — Cloudflare Workers with Static Assets
 
-**Goal:** Merge to main → auto-deploys to `play.8-p.ch`.
+**Goal:** Merge to main → auto-deploys to `arukone.play.example.com`.
 
 #### Why Cloudflare Workers (not Pages)
 
@@ -271,8 +271,8 @@ deploy:
 
 #### Custom domain setup (one-time, manual)
 1. Cloudflare dashboard → Workers & Pages → arukone → Settings → Domains & Routes
-2. Add custom domain: `play.8-p.ch`
-3. Since `8-p.ch` is already on Cloudflare, CNAME is added automatically
+2. Add custom domain: `arukone.play.example.com`
+3. If your zone is already on Cloudflare, CNAME is added automatically
 4. SSL is automatic and free
 
 ---
@@ -288,8 +288,8 @@ deploy:
 - [ ] Tested on: iPad, iPhone SE, iPhone Pro Max, Android (Chrome)
 - [ ] Offline play verified (airplane mode after first load)
 - [ ] Install as PWA on iOS + Android — correct icon, standalone mode
-- [ ] `play.8-p.ch` loads, all difficulties playable
-- [ ] Security headers present (check via `curl -I play.8-p.ch`)
+- [ ] `arukone.play.example.com` loads, all difficulties playable
+- [ ] Security headers present (check via `curl -I arukone.play.example.com`)
 - [ ] No external network requests (DevTools → Network, filter non-self)
 - [ ] `/dc:ship major` → `v1.0.0`, CHANGELOG, GitHub Release
 
@@ -308,7 +308,7 @@ After Phase 0 is complete, this is how coding works:
 5. Commit          →  /dc:commit (conventional commit with trailer)
 6. Push + PR       →  git push -u origin HEAD → gh pr create
 7. CI validates    →  lint, typecheck, test, build, audit, wrangler dry-run
-8. Merge           →  Squash merge to main → auto-deploys to play.8-p.ch
+8. Merge           →  Squash merge to main → auto-deploys to arukone.play.example.com
 9. Release         →  /dc:ship patch|minor when ready to cut a version
 ```
 

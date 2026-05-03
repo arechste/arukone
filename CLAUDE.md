@@ -64,7 +64,7 @@ mise run build        # Type-check + production build
 - Hint system compares against stored solution — uniqueness verification deferred
 - Generator uses thomasahle/numberlink (MITM algorithm) — quality filtered by interleaving score
 - Target platforms: iPad, iPhone, Android (PWA)
-- Deploy target: Cloudflare Workers (play.8-p.ch)
+- Deploy target: Cloudflare Workers with Static Assets. Public docs use `arukone.play.example.com` placeholder; real coordinates live in private project memory.
 
 ## Ship plan
 

@@ -1,0 +1,21 @@
+# gitleaks configuration
+# https://github.com/gitleaks/gitleaks
+#
+# Inherits the default ruleset (Cloudflare API tokens, AWS keys, GitHub
+# tokens, generic high-entropy strings, etc.) and adds repo-specific
+# allowlists for safe-looking patterns.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Repo-wide allowlist for committed templates and docs"
+paths = [
+  '''(.*\.example|\.env\.op)''',           # template files
+  '''docs/SECRETS\.md''',                  # documents secret format on purpose
+  '''generator/LICENSE''',                 # AGPL text contains URLs
+  '''LICENSE''',
+]
+regexes = [
+  '''op://[A-Za-z0-9_./-]+''',             # 1Password references are not secrets
+]

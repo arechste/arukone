@@ -2,8 +2,14 @@
 set -euo pipefail
 
 echo "pre-commit: running lint + typecheck..."
-
 bun run lint
 bun run --bun tsc -b --noEmit
+
+if command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: scanning staged changes for secrets..."
+  gitleaks protect --staged --no-banner --redact
+else
+  echo "pre-commit: gitleaks not installed; skipping secret scan (install via 'brew install gitleaks')"
+fi
 
 echo "pre-commit: passed"

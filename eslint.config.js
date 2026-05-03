@@ -22,6 +22,14 @@ export default defineConfig([
     rules: {
       'no-unsanitized/method': 'error',
       'no-unsanitized/property': 'error',
+      // Enforce AGPL/MIT boundary: src/ must never import from generator/.
+      // See LICENSING.md.
+      'no-restricted-imports': ['error', {
+        patterns: [{
+          group: ['**/generator/**', '../generator/**', '../../generator/**'],
+          message: 'src/ is MIT; generator/ is AGPL-3.0. Importing across this boundary would taint the runtime. See LICENSING.md.',
+        }],
+      }],
     },
     languageOptions: {
       ecmaVersion: 2020,

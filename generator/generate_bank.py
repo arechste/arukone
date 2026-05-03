@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Copyright (c) 2026 Alex Rechsteiner
+# Imports from thomasahle/numberlink (AGPL-3.0); this wrapper inherits AGPL-3.0.
+# See ./LICENSE and ./README.md.
 """
 Arukone Puzzle Bank Generator
 Wraps thomasahle's numberlink generator to produce high-quality puzzles

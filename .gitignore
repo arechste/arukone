@@ -7,3 +7,20 @@ dist
 .wrangler/
 *.swp
 .idea/
+
+# Secrets — never commit
+.env
+.env.local
+.env.*.local
+secrets/
+*.pem
+*.key
+id_rsa
+id_ed25519
+id_ecdsa
+*.pfx
+*.p12
+
+# Allow committed templates
+!.env.example
+!.env.op
