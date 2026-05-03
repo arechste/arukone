@@ -2,21 +2,17 @@ name: CI
 
 on:
   push:
+    # Pushes to main and version tags ALWAYS run — no path filtering.
+    # Tag deploys must fire even when the tagged commit is docs-only.
     branches: [main]
     tags: ["v*.*.*"]
-    paths-ignore:
-      - "**.md"
-      - "generator/**"
-      - ".claude/**"
-      - ".githooks/**"
-      - "docs/**"
   pull_request:
+    # PRs can skip CI for doc-only changes (saves runner minutes).
     branches: [main]
     paths-ignore:
       - "**.md"
       - "generator/**"
       - ".claude/**"
-      - ".githooks/**"
       - "docs/**"
 
 concurrency:
