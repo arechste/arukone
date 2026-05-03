@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { PATH_COLORS } from '../lib/constants';
 import type { DifficultyConfig } from '../lib/types';
+import { FeedbackWidget } from './FeedbackWidget';
+import type { Rating } from '../hooks/useFeedback';
 
 interface WinOverlayProps {
   difficulty: DifficultyConfig;
@@ -11,6 +13,7 @@ interface WinOverlayProps {
   bestTime: string;
   totalSolved: number;
   onNextPuzzle: () => void;
+  onRate: (rating: Rating) => void;
 }
 
 function generateConfetti() {
@@ -40,7 +43,9 @@ function Confetti() {
   );
 }
 
-export function WinOverlay({ difficulty, rows, cols, timer, moves, bestTime, totalSolved, onNextPuzzle }: WinOverlayProps) {
+export function WinOverlay({ difficulty, rows, cols, timer, moves, bestTime, totalSolved, onNextPuzzle, onRate }: WinOverlayProps) {
+  const [feedbackDone, setFeedbackDone] = useState(false);
+
   return (
     <div className="win-overlay">
       <Confetti />
@@ -61,10 +66,16 @@ export function WinOverlay({ difficulty, rows, cols, timer, moves, bestTime, tot
             <div className="lbl">Best</div>
           </div>
         </div>
-        <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 20 }}>
+        <p style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 16 }}>
           {totalSolved} puzzle{totalSolved !== 1 ? 's' : ''} solved
         </p>
-        <button className="btn btn--filled" style={{ padding: '12px 32px', fontSize: 15 }} onClick={onNextPuzzle}>
+        {!feedbackDone && (
+          <FeedbackWidget
+            onRate={(r) => { onRate(r); setFeedbackDone(true); }}
+            onSkip={() => setFeedbackDone(true)}
+          />
+        )}
+        <button className="btn btn--filled" style={{ padding: '12px 32px', fontSize: 15, marginTop: 12 }} onClick={onNextPuzzle}>
           Next Puzzle &rarr;
         </button>
       </div>

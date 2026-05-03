@@ -1,4 +1,8 @@
+import { useCallback } from 'react';
 import { useGameState } from './hooks/useGameState';
+import { useHelp } from './hooks/useHelp';
+import { useFeedback } from './hooks/useFeedback';
+import type { Rating } from './hooks/useFeedback';
 import { Header } from './components/Header';
 import { DifficultyPicker } from './components/DifficultyPicker';
 import { Grid } from './components/Grid';
@@ -6,10 +10,11 @@ import { Toolbar } from './components/Toolbar';
 import { WinOverlay } from './components/WinOverlay';
 import { PairStatus } from './components/PairStatus';
 import { Footer } from './components/Footer';
+import { HelpOverlay } from './components/HelpOverlay';
 
 export default function App() {
   const {
-    theme, difficulty, puzzle, timer, moves, solved,
+    theme, difficulty, puzzleIndex, puzzle, timer, moves, solved,
     hintMap, showSolution, stats, difficulties, pairStatuses,
     playerPaths, history, gridRef,
     handlePointerDown, handlePointerMove, handlePointerUp,
@@ -18,7 +23,19 @@ export default function App() {
     getCellContent, formatTime,
   } = useGameState();
 
+  const help = useHelp();
+  const feedback = useFeedback();
   const connectedCount = pairStatuses.filter(s => s === 'connected').length;
+
+  const handleRate = useCallback((rating: Rating) => {
+    feedback.record({
+      puzzleId: `${difficulty}-${puzzleIndex}`,
+      difficulty,
+      rating,
+      timeSeconds: timer,
+      ts: Date.now(),
+    });
+  }, [feedback, difficulty, puzzleIndex, timer]);
 
   return (
     <div className="app">
@@ -31,11 +48,11 @@ export default function App() {
       />
 
       <div className="stats">
-        <div className="stat">{'\u23F1'} <strong>{formatTime(timer)}</strong></div>
+        <div className="stat">{'⏱'} <strong>{formatTime(timer)}</strong></div>
         <div className="stat">
           <strong>{connectedCount}</strong> / {puzzle.pairs} pairs
         </div>
-        <div className="stat">{'\u2197'} <strong>{moves}</strong> moves</div>
+        <div className="stat">{'↗'} <strong>{moves}</strong> moves</div>
       </div>
 
       <Grid
@@ -57,6 +74,7 @@ export default function App() {
         onReset={handleReset}
         onNewPuzzle={handleNewPuzzle}
         onHint={handleHint}
+        onShowHelp={help.show}
       />
 
       <button
@@ -67,12 +85,22 @@ export default function App() {
           marginTop: 4,
         }}
       >
-        {showSolution ? '\u2298 hide solution' : '\u2299 debug'}
+        {showSolution ? '⊘ hide solution' : '⊙ debug'}
       </button>
 
       <PairStatus endpoints={puzzle.endpoints} statuses={pairStatuses} />
 
       <Footer />
+
+      {help.open && (
+        <HelpOverlay
+          difficultyLabel={difficulties[difficulty].label}
+          rows={puzzle.rows}
+          cols={puzzle.cols}
+          pairs={puzzle.pairs}
+          onClose={help.close}
+        />
+      )}
 
       {solved && (
         <WinOverlay
@@ -81,9 +109,10 @@ export default function App() {
           cols={puzzle.cols}
           timer={formatTime(timer)}
           moves={moves}
-          bestTime={stats.bestTimes[difficulty] ? formatTime(stats.bestTimes[difficulty]) : '\u2014'}
+          bestTime={stats.bestTimes[difficulty] ? formatTime(stats.bestTimes[difficulty]) : '—'}
           totalSolved={stats.totalSolved}
           onNextPuzzle={handleNewPuzzle}
+          onRate={handleRate}
         />
       )}
     </div>

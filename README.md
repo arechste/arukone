@@ -75,6 +75,14 @@ The deployed runtime contains zero AGPL code. See [`LICENSING.md`](./LICENSING.m
 for the full explanation and [`THIRD_PARTY_LICENSES.md`](./THIRD_PARTY_LICENSES.md)
 for runtime dependency licenses.
 
+## Privacy
+
+Nothing leaves the device. Stats, best times, dismissed-help flag, and
+puzzle ratings live in `localStorage` only — there is no server, no
+analytics, no telemetry, no cookies. A future opt-in beacon for
+aggregate puzzle ratings (to tune the generator) is on the roadmap and
+will be explicitly opt-in if it ships.
+
 ## Security
 
 See [`SECURITY.md`](./SECURITY.md) for vulnerability reporting.
