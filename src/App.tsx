@@ -6,6 +6,7 @@ import { Grid } from './components/Grid';
 import { Toolbar } from './components/Toolbar';
 import { WinOverlay } from './components/WinOverlay';
 import { PairStatus } from './components/PairStatus';
+import { Footer } from './components/Footer';
 
 export default function App() {
   const {
@@ -72,6 +73,8 @@ export default function App() {
       </button>
 
       <PairStatus endpoints={puzzle.endpoints} statuses={pairStatuses} />
+
+      <Footer />
 
       {solved && (
         <WinOverlay

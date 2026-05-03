@@ -235,6 +235,21 @@ body, #root {
 }
 .pair-dot.partial { opacity: 0.55; }
 
+/* ── FOOTER ── */
+.footer {
+  width: 100%; display: flex; justify-content: center;
+  margin-top: 16px; padding-top: 8px;
+}
+.footer__version {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  text-decoration: none;
+  font-family: ui-monospace, 'SF Mono', SFMono-Regular, monospace;
+  transition: opacity 0.15s;
+}
+.footer__version:hover { opacity: 0.9; }
+
 /* ── HINT OVERLAYS ── */
 .hint-overlay {
   position: absolute; inset: 8%; z-index: 8;
