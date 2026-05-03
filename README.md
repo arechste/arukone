@@ -54,6 +54,7 @@ to Cloudflare Pages). Two environments:
 
 Full walkthrough: [`docs/DEPLOY.md`](./docs/DEPLOY.md).
 Secrets handling: [`docs/secret-management.md`](./docs/secret-management.md).
+Operational dashboards (CI, traffic, DDoS posture): [`docs/DASHBOARDS.md`](./docs/DASHBOARDS.md).
 
 ## Self-host
 
