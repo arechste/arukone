@@ -34,3 +34,18 @@ run = "bun audit --audit-level=high"
 [tasks.build]
 description = "Type-check + build"
 run = "bun run build"
+
+[tasks."deploy:dry"]
+description = "Validate Cloudflare config (no credentials needed)"
+depends = ["build"]
+run = "bunx wrangler deploy --dry-run --env production --outdir .tmp/deploy-preview"
+
+[tasks."deploy:preview"]
+description = "Deploy to preview env (uses 1Password via op run)"
+depends = ["build"]
+run = "op run --account arcavault --env-file=.env.op -- bunx wrangler deploy --env preview"
+
+[tasks."deploy:production"]
+description = "Deploy to production env (uses 1Password via op run)"
+depends = ["build"]
+run = "op run --account arcavault --env-file=.env.op -- bunx wrangler deploy --env production"

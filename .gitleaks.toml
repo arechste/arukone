@@ -12,7 +12,7 @@ useDefault = true
 description = "Repo-wide allowlist for committed templates and docs"
 paths = [
   '''(.*\.example|\.env\.op)''',           # template files
-  '''docs/SECRETS\.md''',                  # documents secret format on purpose
+  '''docs/secret-management\.md''',        # documents secret format on purpose
   '''generator/LICENSE''',                 # AGPL text contains URLs
   '''LICENSE''',
 ]

@@ -47,7 +47,7 @@ to Cloudflare Pages). Two environments:
   after manual approval.
 
 Full walkthrough: [`docs/DEPLOY.md`](./docs/DEPLOY.md).
-Secrets handling: [`docs/SECRETS.md`](./docs/SECRETS.md).
+Secrets handling: [`docs/secret-management.md`](./docs/secret-management.md).
 
 ## Self-host
 
