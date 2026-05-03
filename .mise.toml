@@ -19,6 +19,10 @@ run = "mise run dev"
 description = "Run tests"
 run = "bunx vitest run"
 
+[tasks.smoke]
+description = "Run Playwright smoke tests (set SMOKE_URL for remote target)"
+run = "bunx playwright test"
+
 [tasks.lint]
 description = "Run ESLint"
 run = "bun run lint"
